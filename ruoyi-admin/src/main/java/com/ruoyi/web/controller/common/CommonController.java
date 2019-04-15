@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +71,7 @@ public class CommonController
     /**
      * 通用上传请求
      */
+    @ApiOperation("上传文件")
     @PostMapping("/common/upload")
     @ResponseBody
     public AjaxResult uploadFile(MultipartFile file) throws Exception

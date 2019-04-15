@@ -47,7 +47,7 @@
 		<module>ruoyi-quartz</module>
 		<module>ruoyi-generator</module>
         <module>ruoyi-common</module>
-    </modules>
+	</modules>
     <packaging>pom</packaging>
 
 

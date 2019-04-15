@@ -1,8 +1,10 @@
 package com.ruoyi.web.core.config;
 
+import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.ruoyi.common.config.Global;
+import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -11,6 +13,9 @@ import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import sun.misc.Request;
+
+import java.util.function.Predicate;
 
 /**
  * Swagger2的接口配置
@@ -27,12 +32,15 @@ public class SwaggerConfig
     @Bean
     public Docket createRestApi()
     {
+        com.google.common.base.Predicate<RequestHandler> selector1 = RequestHandlerSelectors.basePackage("com.ruoyi.web.controller.tool");
+        com.google.common.base.Predicate<RequestHandler> selector2 = RequestHandlerSelectors.basePackage("com.ruoyi.web.controller.common");
         return new Docket(DocumentationType.SWAGGER_2)
                 // 详细定制
                 .apiInfo(apiInfo())
                 .select()
                 // 指定当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.ruoyi.web.controller.tool"))
+                .apis(Predicates.or(selector1,selector2))
+//                .apis(RequestHandlerSelectors.basePackage("com.ruoyi.web.controller.common.CommonController"))
                 // 扫描所有 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build();
