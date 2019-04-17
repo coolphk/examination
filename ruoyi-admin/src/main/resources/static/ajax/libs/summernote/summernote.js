@@ -7769,7 +7769,7 @@
               'orderedlist': 'note-icon-orderedlist',
               'pencil': 'note-icon-pencil',
               'picture': 'note-icon-picture',
-              'question': 'note-icon-question',
+              'question': 'note-icon-examination',
               'redo': 'note-icon-redo',
               'rollback': 'note-icon-rollback',
               'square': 'note-icon-square',
