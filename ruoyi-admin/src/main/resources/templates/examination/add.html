@@ -11,12 +11,12 @@
                 <input id="questionTitle" name="questionTitle" class="form-control" type="text">
             </div>
         </div>
-        <div class="form-group">
+        <!--<div class="form-group">
             <label class="col-sm-3 control-label">正确答案：</label>
             <div class="col-sm-8">
                 <input id="rightAnswer" name="rightAnswer" class="form-control" type="text">
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <label class="col-sm-3 control-label">考题顺序：</label>
             <div class="col-sm-6">
@@ -24,47 +24,72 @@
             </div>
             <button type="button" id="addAnswer" class="btn btn-primary">添加答案</button>
         </div>
-
+        <input type="text" name="rightAnswer" id="rightAnswer"/>
     </form>
 </div>
 <div th:include="include::footer"></div>
+<script src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+<script id="tpl-answer" type="text/html">
+    <div class="form-group">
+        <label class="col-sm-3 control-label" id="label_answer_{{index}}">答案：{{code}}</label>
+        <div class="col-sm-6">
+            <div class="input-group" style="line-height:30px;vertical-align: middle">
+                <input id="answer_{{index}}" name="answer" class="form-control" type="text"/>
+                <span class="input-group-addon"><input type="radio" class="radioAnswer" id="radio_{{index}}"
+                                                       name="radioAnswer"/></span>
+            </div>
+        </div>
+    </div>
+</script>
 <script type="text/javascript">
     var prefix = ctx + "examination"
     var index = 0;
+    var answerAdded = false;
     $("#form-question-add").validate({
         rules: {
-            xxxx: {
+            questionTitle: {
                 required: true,
-            },
+            }
         }
+
     });
 
     function submitHandler() {
         if ($.validate.form()) {
             var formData = {
                 "questionTitle": $("#questionTitle").val(),
-                "rightAnswer": $("rightAnswer").val(),
-                "orderNum": $("orderNum").val()
+                "rightAnswer": $("#rightAnswer").val(),
+                "orderNum": $("#orderNum").val()
+                // "answer":
             };
-            var answerObj={}
-            $("input[name='answer']").each(function (index, item) {
-                // console.log()
-                // var key=$(item).parent().prev("label")
-                debugger;
-                // answerObj[]
-            })
+            var answerObj = {}
+            for (var i = 0; i < index; i++) {
+                answerObj[$("#label_answer_" + i).text()] = $("#answer_" + i).val()
+            }
+            console.log(answerObj)
+            formData.answer=JSON.stringify(answerObj);
+
             $.operate.save(prefix + "/add", formData);
         }
     }
 
     $("#addAnswer").on("click", function () {
-        var $ansContainer = $('<div class="form-group"><label class="col-sm-3 control-label">答案：' +
-            String.fromCharCode(65 + index) + '</label><div class="col-sm-6">' +
-            '<input id="answer_' + index + '" name="answer" class="form-control" type="text">' +
-            '</div></div>');
-        $("#form-question-add").append($ansContainer)
+        var data = {
+            code: String.fromCharCode(65 + index),
+            index: index
+        }
+        var html = template("tpl-answer", data);
+        $("#form-question-add").append($(html));
+        (function (i) {
+            $("#radio_" + index).on("change", function () {
+                $("#rightAnswer").val($("#label_answer_" + i).text());
+            })
+        }(index))
         index++;
+        answerAdded = true;
     })
+
+
 </script>
 </body>
 </html>
