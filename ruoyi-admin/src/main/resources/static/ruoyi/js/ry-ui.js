@@ -486,6 +486,7 @@
             		shadeClose: true,
             		yes: function(index, layero) {
             	        var iframeWin = layero.find('iframe')[0];
+            	        debugger;
             	        iframeWin.contentWindow.submitHandler();
             	    },
             	    cancel: function(index) {
@@ -648,7 +649,7 @@
             	$.modal.openFull("修改" + $.table._option.modalName, url);
             },
             // 保存信息
-            save: function(url, data) {
+            save: function(url, data,cType) {
             	var config = {
         	        url: url,
         	        type: "post",
@@ -662,6 +663,8 @@
         	        	$.operate.successCallback(result);
         	        }
         	    };
+                cType && $.extend(config,cType);
+                debugger
         	    $.ajax(config)
             },
             // 保存结果弹出msg刷新table表格

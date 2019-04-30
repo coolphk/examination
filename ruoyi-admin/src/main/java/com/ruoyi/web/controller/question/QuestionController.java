@@ -2,17 +2,14 @@ package com.ruoyi.web.controller.question;
 
 import java.util.List;
 
+import com.ruoyi.model.QuestionModel;
 import com.ruoyi.system.domain.Question;
 import com.ruoyi.system.service.IQuestionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.framework.web.base.BaseController;
@@ -85,9 +82,11 @@ public class QuestionController extends BaseController
 	@Log(title = "考题", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(Question question)
-	{		
-		return toAjax(questionService.insertQuestion(question));
+	public AjaxResult addSave(QuestionModel question)
+	{
+		System.out.println(question);
+		return null;
+//		return toAjax(questionService.insertQuestion(question));
 	}
 
 	/**
