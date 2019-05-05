@@ -254,6 +254,7 @@ public class ShiroConfig
     /**
      * Shiro过滤器配置
      */
+    //todo controller权限管理
     @Bean
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager)
     {
@@ -279,6 +280,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/druid/**", "anon");
         filterChainDefinitionMap.put("/common/upload/**","anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
+        filterChainDefinitionMap.put("/front/**", "anon");
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问

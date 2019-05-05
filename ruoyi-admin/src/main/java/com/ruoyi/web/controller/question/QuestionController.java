@@ -82,11 +82,11 @@ public class QuestionController extends BaseController
 	@Log(title = "考题", businessType = BusinessType.INSERT)
 	@PostMapping("/add")
 	@ResponseBody
-	public AjaxResult addSave(QuestionModel question)
+	public AjaxResult addSave(Question question)
 	{
 		System.out.println(question);
-		return null;
-//		return toAjax(questionService.insertQuestion(question));
+//		return null;
+		return toAjax(questionService.insertQuestion(question));
 	}
 
 	/**

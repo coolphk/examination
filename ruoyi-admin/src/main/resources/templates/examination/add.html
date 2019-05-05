@@ -24,7 +24,7 @@
             </div>
             <button type="button" id="addAnswer" class="btn btn-primary">添加答案</button>
         </div>
-        <input type="text" name="rightAnswer" id="rightAnswer"/>
+        <input type="hidden" name="rightAnswer" id="rightAnswer"/>
     </form>
 </div>
 <div th:include="include::footer"></div>
@@ -44,31 +44,49 @@
 <script type="text/javascript">
     var prefix = ctx + "examination"
     var index = 0;
-    var answerAdded = false;
     $("#form-question-add").validate({
         rules: {
             questionTitle: {
                 required: true,
             }
         }
-
     });
 
     function submitHandler() {
+        var answerArray = [];
         if ($.validate.form()) {
+            if (index <= 0) {
+                $.modal.alertError("请给题目添加答案。");
+                return false;
+            }
+            $("input[name='answer']").each(function (index, item) {
+                if ($(item).val().trim().length <= 0) {
+                    answerArray.push(false)
+                }
+            })
+
+            for (var i = 0; i < answerArray.length; i++) {
+                if (!answerArray[i]) {
+                    $.modal.alertError("请输入正确答案。");
+                    answerArray = null;
+                    return false;
+                }
+            }
+            if ($("#rightAnswer").val().trim().length <= 0) {
+                $.modal.alertError("请选择正确的答案。");
+                return false
+            }
             var formData = {
                 "questionTitle": $("#questionTitle").val(),
                 "rightAnswer": $("#rightAnswer").val(),
                 "orderNum": $("#orderNum").val()
-                // "answer":
             };
             var answerObj = {}
             for (var i = 0; i < index; i++) {
                 answerObj[$("#label_answer_" + i).text()] = $("#answer_" + i).val()
             }
-            console.log(answerObj)
-            formData.answer=JSON.stringify(answerObj);
-
+            formData.answer = JSON.stringify(answerObj);
+            debugger;
             $.operate.save(prefix + "/add", formData);
         }
     }
@@ -86,7 +104,6 @@
             })
         }(index))
         index++;
-        answerAdded = true;
     })
 
 
