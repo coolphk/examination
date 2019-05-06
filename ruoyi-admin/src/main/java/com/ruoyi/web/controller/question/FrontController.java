@@ -23,37 +23,14 @@ public class FrontController extends BaseController {
     private String prefix = "front";
 
     @GetMapping("/home")
-    public String Home(HttpServletRequest request, HttpServletResponse response) {
+    public String home() {
         return prefix+"/home";
     }
-    /*public void Home(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            URL url = new URL("https://apip.weatherdt.com/h5.html?id=WA4qyG3njy");
-            URLConnection URLconnection = url.openConnection();
-            HttpURLConnection httpConnection = (HttpURLConnection) URLconnection;
-            httpConnection.setRequestMethod("GET");
-//            httpConnection.setRequestProperty("User-Agent","Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Mobile Safari/537.36");
-//            httpConnection.setInstanceFollowRedirects(false);
-            int responseCode = httpConnection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                InputStream in = httpConnection.getInputStream();
-                InputStreamReader isr = new InputStreamReader(in);
-                BufferedReader bufr = new BufferedReader(isr);
-                String str;
-                response.setHeader("Content-Type","text/html;charset=utf-8");
-                while ((str = bufr.readLine()) != null) {
-                    if(str.contains("<title>中国天气网</title")) {
-                        str="<title>卢龙县</title>";
-                    }
-                    response.getWriter().write(str);
-                }
-                bufr.close();
-            } else {
-                System.err.println("失败");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+
+    @GetMapping("/weather")
+    public String Weather() {
+        return prefix+"/weather";
+    }
+
 
 }

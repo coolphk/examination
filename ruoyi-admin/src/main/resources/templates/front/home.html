@@ -4,23 +4,51 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        * {
-            margin: 0;
+        *{
+            margin:0
         }
+        html {
+            font-size: 16px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+        }
+        header {
+            display: flex;
+            align-content:space-around;
+            height:8%;
+            background: rgb(254,104,111);
+            padding: 0 7%;
+        }
+        header .title {
+            color:white;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        header .subject {
 
-        html, body {
-            width: 100%;
-            height: 100%;
-        }
-        iframe{
-            pointer-events: none;
+
+            /*margin-left: 20%;*/
+            color:white;
+            font-size: 2rem;
+
         }
     </style>
 </head>
-
 <body>
-
-    <iframe id="weather" src="https://apip.weatherdt.com/h5.html?id=WA4qyG3njy" frameborder="0" width="100%" height="100%"></iframe>
+<div class="container">
+    <header>
+        <span class="title">
+            知识测试
+        </span>
+        <span class="subject">
+            共10题&nbsp;&nbsp;所有题目均为单项选择题
+        </span>
+    </header>
+</div>
 
 </body>
 </html>
