@@ -2,6 +2,11 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<style>
+	td {
+		text-overflow:ellipsis
+	}
+</style>
 <body class="gray-bg">
     
      <div class="container-div">
@@ -77,7 +82,12 @@
 				{
 					field : 'questionTitle', 
 					title : '考题',
-					sortable: true
+					sortable: true,
+					formatter:function (value, row, index) {
+						console.log(value);
+						var subValue= value.length>30?value.substring(0,30)+'……':value;
+						return `<div title="${value}">${subValue}</div>`
+					}
 				},
 				{
 					field : 'rightAnswer',

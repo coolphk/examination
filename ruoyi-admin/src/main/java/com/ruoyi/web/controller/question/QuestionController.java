@@ -124,5 +124,5 @@ public class QuestionController extends BaseController
 		return toAjax(questionService.deleteQuestionByIds(ids));
 	}
 
-
+	
 }
