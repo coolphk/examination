@@ -81,5 +81,11 @@ public class QuestionServiceImpl implements IQuestionService
 	{
 		return questionMapper.deleteQuestionByIds(Convert.toStrArray(ids));
 	}
-	
+
+
+	@Override
+	public List<Question> selectQuestionRandom() {
+		return questionMapper.selectQuestionRandom();
+	}
+
 }

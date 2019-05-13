@@ -51,5 +51,10 @@ public interface IQuestionService
      * @return 结果
      */
 	public int deleteQuestionByIds(String ids);
-	
+
+
+	/**
+	 * 随机查找题目
+	 */
+	public List<Question> selectQuestionRandom();
 }
