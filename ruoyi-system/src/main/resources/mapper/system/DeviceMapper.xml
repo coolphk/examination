@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DeviceMapper">
+
+    <resultMap type="Device" id="DeviceResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sn" column="sn"/>
+        <result property="description" column="description"/>
+        <result property="currentStatus" column="current_status"/>
+        <collection property="deviceVisitList" javaType="java.util.List" resultMap="DeviceVisitResult"/>
+    </resultMap>
+
+    <resultMap type="DeviceVisit" id="DeviceVisitResult">
+        <result property="id" column="id"/>
+        <result property="deviceSn" column="device_sn"/>
+        <result property="visitTime" column="visit_time"/>
+        <result property="visitType" column="visit_type"/>
+    </resultMap>
+
+    <resultMap type="DeviceCpu" id="DeviceCpuResult">
+        <result property="id" column="id"/>
+        <result property="deviceSn" column="device_sn"/>
+        <result property="visitTime" column="visit_time"/>
+        <result property="cpu" column="cpu"/>
+    </resultMap>
+
+    <sql id="selectDeviceVo">
+        select id, name, sn, description, current_status from sys_device
+    </sql>
+
+
+    <select id="selectDeviceList" parameterType="Device" resultMap="DeviceResult">
+        <include refid="selectDeviceVo"/>
+        <where>
+            <if test="id != null ">and id = #{id}</if>
+            <if test="name != null  and name != '' ">and name = #{name}</if>
+            <if test="sn != null  and sn != '' ">and sn = #{sn}</if>
+            <if test="description != null  and description != '' ">and description = #{description}</if>
+            <if test="currentStatus != null ">and current_status = #{currentStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectDeviceById" parameterType="Integer" resultMap="DeviceResult">
+        <include refid="selectDeviceVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDevice" parameterType="Device" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_device
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name,</if>
+            <if test="sn != null  and sn != ''  ">sn,</if>
+            <if test="description != null  and description != ''  ">description,</if>
+            <if test="currentStatus != null  ">current_status,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">#{name},</if>
+            <if test="sn != null  and sn != ''  ">#{sn},</if>
+            <if test="description != null  and description != ''  ">#{description},</if>
+            <if test="currentStatus != null  ">#{currentStatus},</if>
+        </trim>
+    </insert>
+
+    <update id="updateDevice" parameterType="Device">
+        update sys_device
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="sn != null  and sn != ''  ">sn = #{sn},</if>
+            <if test="description != null  and description != ''  ">description = #{description},</if>
+            <if test="currentStatus != null  ">current_status = #{currentStatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="updateDeviceStatusBySN" parameterType="Device">
+        update sys_device
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="currentStatus != null  ">current_status = #{currentStatus},</if>
+        </trim>
+        where sn = #{sn}
+    </update>
+
+    <delete id="deleteDeviceById" parameterType="Integer">
+        delete from sys_device where id = #{id}
+    </delete>
+
+    <delete id="deleteDeviceByIds" parameterType="String">
+        delete from sys_device where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="selectDeviceVisit" resultMap="DeviceResult">
+    SELECT
+        d.id,
+        d.NAME,
+        d.sn,
+        d.description,
+        d.current_status,
+        v.visit_time,
+        v.visit_type
+    FROM
+	    sys_device d
+	LEFT JOIN sys_device_visit v ON d.sn = v.device_sn
+    </select>
+
+    <insert id="insertDeviceVisit" parameterType="DeviceVisit" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_device_visit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceSn != null  and deviceSn != ''  ">device_sn,</if>
+            <if test="visitTime != null  ">visit_time,</if>
+            <if test="visitType != null  and visitType != ''  ">visit_type,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deviceSn != null  and deviceSn != ''  ">#{deviceSn},</if>
+            <if test="visitTime != null  ">#{visitTime},</if>
+            <if test="visitType != null  and visitType != ''  ">#{visitType},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertDeviceCpu" parameterType="DeviceCpu" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_device_cpu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deviceSn != null  and deviceSn != ''  ">device_sn,</if>
+            <if test="visitTime != null  ">visit_time,</if>
+            <if test="cpu != null  and cpu != ''  ">cpu,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deviceSn != null  and deviceSn != ''  ">#{deviceSn},</if>
+            <if test="visitTime != null  ">#{visitTime},</if>
+            <if test="cpu != null  and cpu != ''  ">#{cpu},</if>
+        </trim>
+    </insert>
+</mapper>

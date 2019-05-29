@@ -57,4 +57,6 @@ public interface IQuestionService
 	 * 随机查找题目
 	 */
 	public List<Question> selectQuestionRandom();
+
+
 }

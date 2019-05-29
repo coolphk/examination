@@ -5,6 +5,7 @@ import java.util.List;
 import com.ruoyi.generator.domain.TableInfo;
 import com.ruoyi.model.QuestionModel;
 import com.ruoyi.system.domain.Question;
+import com.ruoyi.system.service.IDeviceService;
 import com.ruoyi.system.service.IQuestionService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;

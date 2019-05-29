@@ -278,9 +278,11 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/js/**", "anon");
         filterChainDefinitionMap.put("/ruoyi/**", "anon");
         filterChainDefinitionMap.put("/druid/**", "anon");
-        filterChainDefinitionMap.put("/common/upload/**","anon");
+        filterChainDefinitionMap.put("/common/**","anon");
         filterChainDefinitionMap.put("/captcha/captchaImage**", "anon");
         filterChainDefinitionMap.put("/front/**", "anon");
+        filterChainDefinitionMap.put("/examination/selectrandom","anon");
+        filterChainDefinitionMap.put("/profile/upload/**","anon");
         // 退出 logout地址，shiro去清除session
         filterChainDefinitionMap.put("/logout", "logout");
         // 不需要拦截的访问
