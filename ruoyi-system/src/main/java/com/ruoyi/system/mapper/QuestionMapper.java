@@ -65,6 +65,6 @@ public interface QuestionMapper {
      *
      *
      * */
-    public List<Question> selectQuestionRandom();
+    public List<Question> selectQuestionRandom(Integer questionLimit);
 
 }

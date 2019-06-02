@@ -74,8 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <!--    随机查询10道题目-->
-    <select id="selectQuestionRandom" parameterType="Question" resultMap="QuestionResult">
-        select * from sys_question  ORDER BY  RAND() LIMIT 3
+    <select id="selectQuestionRandom" parameterType="Integer" resultMap="QuestionResult">
+        select * from sys_question  ORDER BY  RAND() LIMIT #{questionLimit}
     </select>
 
 </mapper>
