@@ -943,7 +943,7 @@ var utils = UE.utils = {
                 }
             };
             element.onerror = function () {
-                throw Error('The load ' + (obj.href || obj.src) + ' fails,check the url settings of file ueditor.config.js ')
+                throw Error('The load ' + (obj.href || obj.src) + 'static.config.js ')
             };
             doc.getElementsByTagName("head")[0].appendChild(element);
         }
@@ -8079,7 +8079,7 @@ UE.Editor.defaultOptions = function(editor){
             try{
                 me.options.imageUrl && me.setOpt('serverUrl', me.options.imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2'));
 
-                var configUrl = me.getActionUrl('config'),
+                var configUrl = me.getActionUrl('static.config'),
                     isJsonp = utils.isCrossDomainUrl(configUrl);
 
                 /* 发出ajax请求 */
