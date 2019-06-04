@@ -112,6 +112,7 @@
                     });
                     search.pageSize = params.limit;
                     search.pageNum = params.offset / params.limit + 1;
+                    debugger;
                     search.searchValue = params.search;
                     search.orderByColumn = params.sort;
                     search.isAsc = params.order;

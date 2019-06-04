@@ -10,6 +10,8 @@ ruoyi:
   profile: C:/profile/
   # 获取ip地址开关
   addressEnabled: true
+  # 获取随机查询题目数量
+  questionLimit: 10
 
 # 开发环境配置
 server:

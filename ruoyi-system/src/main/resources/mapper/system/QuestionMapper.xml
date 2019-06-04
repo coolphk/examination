@@ -20,8 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectQuestionVo"/>
         <where>  
             <if test="questionId != null "> and question_id = #{questionId}</if>
-             <if test="questionTitle != null  and questionTitle != '' "> and question_title = #{questionTitle}</if>
-             <if test="rightAnswer != null  and rightAnswer != '' "> and right_answer = #{rightAnswer}</if>
+             <if test="questionTitle != null  and questionTitle != '' "> and question_title like concat('%',#{questionTitle},'%')</if>
+             <if test="rightAnswer != null  and rightAnswer != '' "> and right_answer like concat('%',#{rightAnswer},'%')</if>
              <if test="orderNum != null "> and order_num = #{orderNum}</if>
              <if test="answer != null "> and answer = #{answer}</if>
          </where>
@@ -74,8 +74,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <!--    随机查询10道题目-->
-    <select id="selectQuestionRandom" parameterType="Question" resultMap="QuestionResult">
-        select * from sys_question  ORDER BY  RAND() LIMIT 3
+    <select id="selectQuestionRandom" parameterType="Integer" resultMap="QuestionResult">
+        select * from sys_question  ORDER BY  RAND() LIMIT #{questionLimit}
     </select>
 
 </mapper>
