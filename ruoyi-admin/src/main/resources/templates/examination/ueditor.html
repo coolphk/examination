@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<style>
+    td {
+        text-overflow:ellipsis
+    }
+</style>
+<body class="gray-bg">
+
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12">
+            <div>
+                <h1>完整demo</h1>
+                <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/test/ueditor.config.js}"></script>
+<script th:src="@{/js/test/ueditor.all.js}"></script>
+<!--<script th:src="@{/js/lang/zh-cn/zh-cn.js}"></script>-->
+<script type="text/javascript">
+    var ue = UE.getEditor('editor');
+</script>
+<div th:include="include :: footer"></div>
+
+</body>
+</html>

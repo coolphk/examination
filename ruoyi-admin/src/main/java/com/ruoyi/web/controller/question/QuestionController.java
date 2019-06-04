@@ -123,4 +123,9 @@ public class QuestionController extends BaseController {
     public TableDataInfo selectRandom() {
         return getDataTable(questionService.selectQuestionRandom());
     }
+
+    @GetMapping("ueditor")
+    public String UEditor() {
+        return prefix + "/ueditor";
+    }
 }
