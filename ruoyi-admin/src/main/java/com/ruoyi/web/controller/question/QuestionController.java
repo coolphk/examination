@@ -179,12 +179,13 @@ public class QuestionController extends BaseController {
 
     @PostMapping("/uploadimage")
     @ResponseBody
-    public AjaxResult uploadImageData(MultipartFile file) {
+    public AjaxResult uploadImageData(MultipartHttpServletRequest mRequest) {
 //        UeditorImage msg = uploadFile(request);
         try {
             // 上传文件路径
             String filePath = Global.getUploadPath();
             // 上传并返回新文件名称
+            MultipartFile  file = mRequest.getFile("upfile");
             String fileName = FileUploadUtils.upload(filePath, file);
             String url = serverConfig.getUrl() + UPLOAD_PATH + fileName;
             AjaxResult ajax = AjaxResult.success();
@@ -207,24 +208,31 @@ public class QuestionController extends BaseController {
         public String getState() {
             return state;
         }
+
         public void setState(String state) {
             this.state = state;
         }
+
         public String getUrl() {
             return url;
         }
+
         public void setUrl(String url) {
             this.url = url;
         }
+
         public String getTitle() {
             return title;
         }
+
         public void setTitle(String title) {
             this.title = title;
         }
+
         public String getOriginal() {
             return original;
         }
+
         public void setOriginal(String original) {
             this.original = original;
         }
