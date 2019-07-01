@@ -22,6 +22,8 @@ public interface DeviceMapper {
      */
     public Device selectDeviceById(Integer id);
 
+
+
     /**
      * 查询设备列表
      *
@@ -74,5 +76,7 @@ public interface DeviceMapper {
      * @return
      */
     public int updateDeviceStatusBySN(Device device);
+
+
 
 }

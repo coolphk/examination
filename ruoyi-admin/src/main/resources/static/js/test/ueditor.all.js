@@ -9967,13 +9967,13 @@ var LocalStorage = UE.LocalStorage = (function () {
 UE.plugins['defaultfilter'] = function () {
     var me = this;
     me.setOpt({
-        'allowDivTransToP':true,
+        'allowDivTransToP':false,
         'disabledTableInTable':true
     });
     //默认的过滤处理
     //进入编辑器的内容处理
     me.addInputRule(function (root) {
-        var allowDivTransToP = this.options.allowDivTransToP;
+        var allowDivTransToP = false;
         var val;
         function tdParent(node){
             while(node && node.type == 'element'){

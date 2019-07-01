@@ -29,6 +29,8 @@ public class Device extends BaseEntity
 
 	private List<DeviceVisit> deviceVisitList;
 
+	private List<DeviceCpu> deviceCpuList;
+
 	public void setId(Integer id) 
 	{
 		this.id = id;
@@ -82,5 +84,13 @@ public class Device extends BaseEntity
 
 	public void setDeviceVisitList(List<DeviceVisit> deviceVisitList) {
 		this.deviceVisitList = deviceVisitList;
+	}
+
+	public List<DeviceCpu> getDeviceCpuList() {
+		return deviceCpuList;
+	}
+
+	public void setDeviceCpuList(List<DeviceCpu> deviceCpuList) {
+		this.deviceCpuList = deviceCpuList;
 	}
 }

@@ -115,6 +115,16 @@ public class DeviceServiceImpl implements IDeviceService {
 
     @Override
     public int insertDeviceCpu(DeviceCpu deviceCpu) {
+        Device device = new Device();
+        device.setSn(deviceCpu.getDeviceSn());
+        List<Device> deviceList = deviceMapper.selectDeviceList(device);
+        if (deviceList.size() == 0) {
+            device.setName(deviceCpu.getDeviceSn());
+            device.setDescription("根据上报的CPU记录自动添加的设备");
+            device.setCurrentStatus(1);
+            deviceMapper.insertDevice(device);
+        }
+
         return deviceMapper.insertDeviceCpu(deviceCpu);
     }
 }

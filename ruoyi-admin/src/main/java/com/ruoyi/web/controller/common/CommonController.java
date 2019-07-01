@@ -131,6 +131,11 @@ public class CommonController extends BaseController {
         return ajaxResult;
     }
 
+    /**
+     * 设备访问次数
+     * @param deviceVisit
+     * @return
+     */
     @ApiOperation("访问接口")
     @GetMapping("/visit")
     @ResponseBody
